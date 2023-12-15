@@ -44,6 +44,9 @@ public class FuncionariosEntity {
     @Column(name = "telefone")
     private String telephone;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status")
+    private Status status;
     @PrePersist
     public void prePersist(){
         if (datehiring == null){
@@ -51,25 +54,12 @@ public class FuncionariosEntity {
         }
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    public enum Status{
+        ATIVO,
+        INATIVO,
+        EM_FERIAS,
+        FOLGA,
+        LICENCA;
+    }
 
 }

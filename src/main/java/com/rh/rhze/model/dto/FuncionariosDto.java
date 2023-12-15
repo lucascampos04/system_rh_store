@@ -22,7 +22,9 @@ public class FuncionariosDto implements Serializable {
     private String cpf;
     private String telephone;
     private String email;
-    public FuncionariosDto(Long employeeidentifier, String name, float salary, String office, LocalDateTime datehiring, int hoursMount, String cpf, String telephone, String email) {
+    private FuncionariosEntity.Status status;
+
+    public FuncionariosDto(Long employeeidentifier, String name, float salary, String office, LocalDateTime datehiring, int hoursMount, String cpf, String telephone, String email, FuncionariosEntity.Status status) {
         this.employeeidentifier = employeeidentifier;
         this.name = name;
         this.salary = salary;
@@ -32,6 +34,7 @@ public class FuncionariosDto implements Serializable {
         this.cpf = cpf;
         this.telephone = telephone;
         this.email = email;
+        this.status = status;
     }
 
     public static FuncionariosDto fromEntity(FuncionariosEntity entity){
@@ -44,7 +47,8 @@ public class FuncionariosDto implements Serializable {
                 entity.getHoursMount(),
                 entity.getCpf(),
                 entity.getTelephone(),
-                entity.getEmail()
+                entity.getEmail(),
+                entity.getStatus()
         );
     }
 
@@ -60,6 +64,7 @@ public class FuncionariosDto implements Serializable {
                 "cpf='" + cpf + '\'' + '\n' +
                 "telephone='" + telephone + '\'' + '\n' +
                 "email='" + email + '\'' + '\n' +
+                "status='" + status + '\'' + '\n' +
                 '}';
     }
 }
