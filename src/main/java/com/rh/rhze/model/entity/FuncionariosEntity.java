@@ -35,22 +35,19 @@ public class FuncionariosEntity {
     @Column(name = "horas_extras")
     private int overtime;
 
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "cpf")
+    private String cpf;
+
+    @Column(name = "telefone")
+    private String telephone;
+
     @PrePersist
     public void prePersist(){
         if (datehiring == null){
             datehiring = LocalDateTime.now();
-        }
-
-        if (office != null && office.equals("caixa")){
-            hoursMount = 220;
-
-            boolean isOvertime = hoursMount > 220;
-
-            if (isOvertime){
-                overtime = 8;
-                float newSalary = getSalary() + 100;
-                salary = newSalary;
-            }
         }
     }
 
