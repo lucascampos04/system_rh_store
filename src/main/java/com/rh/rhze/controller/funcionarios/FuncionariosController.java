@@ -3,9 +3,9 @@ package com.rh.rhze.controller.funcionarios;
 import com.rh.rhze.controller.service.FuncionariosServices;
 import com.rh.rhze.model.dto.FuncionariosDto;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -15,6 +15,17 @@ public class FuncionariosController {
 
     @Autowired
     private FuncionariosServices funcionariosServices;
+    @PostMapping("/inserir/funcionario")
+    public ResponseEntity<String> inserirFuncionario(@RequestBody FuncionariosDto dto){
+        try {
+            FuncionariosDto funcionariosDto = funcionariosServices.insertFuncionario(dto);
+            return ResponseEntity.status(HttpStatus.CREATED).body(String.valueOf(funcionariosDto));
+        } catch (Exception e){
+            String errorMessage = e.getMessage();
+            System.out.println(errorMessage);
+           return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorMessage);
+        }
+    }
 
     @GetMapping("/rh/show/funcionarios")
     public List<FuncionariosDto> getAllFuncionarios(){
