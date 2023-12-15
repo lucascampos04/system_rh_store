@@ -1,5 +1,6 @@
 package com.rh.rhze.controller.service;
 
+import com.rh.rhze.infra.exception.ValidacaoExcpetion;
 import com.rh.rhze.model.dto.FuncionariosDto;
 import com.rh.rhze.model.entity.FuncionariosEntity;
 import com.rh.rhze.model.repository.FuncionariosRepository;
@@ -48,21 +49,21 @@ public class FuncionariosServices {
             }
 
             if (funcionariosDto.getCpf() != null && funcionariosRepository.existsByCpf(funcionariosDto.getCpf())){
-                throw new RuntimeException("CPF JÁ CADASTRADO!!!!");
+                throw new ValidacaoExcpetion("CPF JÁ CADASTRADO!!!!");
             }
 
             if (funcionariosRepository.existsByEmail(funcionariosDto.getEmail())){
-                throw new RuntimeException("EMAIL JÁ CADASTRADO!!!!");
+                throw new ValidacaoExcpetion("EMAIL JÁ CADASTRADO!!!!");
             }
 
             if (funcionariosRepository.existsByTelephone(funcionariosDto.getTelephone())){
-                throw new RuntimeException("TELEFONE JÁ CADASTRADO!!!!");
+                throw new ValidacaoExcpetion("TELEFONE JÁ CADASTRADO!!!!");
             }
 
             FuncionariosEntity save = funcionariosRepository.save(funcionariosEntity);
             return FuncionariosDto.fromEntity(save);
         } catch (Exception e){
-            throw new RuntimeException(e.getMessage());
+            throw new ValidacaoExcpetion(e.getMessage());
         }
     }
 
