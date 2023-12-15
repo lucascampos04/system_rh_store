@@ -6,7 +6,6 @@ import com.rh.rhze.model.entity.FuncionariosEntity;
 import com.rh.rhze.model.repository.FuncionariosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,6 +15,13 @@ public class FuncionariosServices {
     @Autowired
     FuncionariosRepository funcionariosRepository;
 
+    /**
+     * Obtém uma lista de todos os funcionários
+     *
+     * @return Lista de DTOs de funcionários
+     * @throws RuntimeException se ocorrer um erro ao recuperar a lista de funcionarios
+     *
+     * */
     public List<FuncionariosDto> listAllFuncionarios(){
         try {
             return funcionariosRepository.findAll().stream()
@@ -25,6 +31,15 @@ public class FuncionariosServices {
             throw new RuntimeException("Erro ao exibir todos os usuarios");
         }
     }
+
+    /**
+     * Insere um novo funcionario com base nos dados fornecidos
+     *
+     * @param funcionariosDto DTO contendo os dados do novo funcionário
+     * @return DTO do funcionário recém-inserido
+     * @throws ValidacaoExcpetion se houver problemas de validação ou ocorrer um erro durante a inserção
+     *
+     * */
     public FuncionariosDto insertFuncionario(FuncionariosDto funcionariosDto){
         try {
             FuncionariosEntity funcionariosEntity = new FuncionariosEntity();
@@ -64,6 +79,24 @@ public class FuncionariosServices {
             return FuncionariosDto.fromEntity(save);
         } catch (Exception e){
             throw new ValidacaoExcpetion(e.getMessage());
+        }
+    }
+
+    /**
+     * Exclui todos os funcionários que tem o campo de 'cpf' null
+     *
+     * @throws ValidacaoExcpetion se ocorrer um erro durante a exclusão
+     *
+     * */
+    public void deletedFuncionarioID(){
+        try {
+            List<FuncionariosEntity> funcionariosEntityList = funcionariosRepository.findByCpfIsNull();
+
+            for (FuncionariosEntity funcionariosEntity: funcionariosEntityList) {
+                funcionariosRepository.deleteById(funcionariosEntity.getEmployeeidentifier());
+            }
+        } catch (Exception e){
+            throw new ValidacaoExcpetion("Erro ao excluir o Funcionario com o ID : ");
         }
     }
 
