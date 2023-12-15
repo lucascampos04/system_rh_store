@@ -24,7 +24,7 @@ public class FuncionariosController {
         } catch (Exception e){
             String errorMessage = e.getMessage();
             System.out.println(errorMessage);
-           return ResponseEntity.status(HttpStatus.CONFLICT).body(errorMessage); // status 409
+           return ResponseEntity.status(HttpStatus.CONFLICT).body(errorMessage);
         }
     }
     @GetMapping("/rh/show/funcionarios")

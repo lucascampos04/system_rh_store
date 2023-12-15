@@ -5,7 +5,10 @@ import com.rh.rhze.model.dto.FuncionariosDto;
 import com.rh.rhze.model.entity.FuncionariosEntity;
 import com.rh.rhze.model.repository.FuncionariosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -49,6 +52,7 @@ public class FuncionariosServices {
             funcionariosEntity.setCpf(funcionariosDto.getCpf());
             funcionariosEntity.setEmail(funcionariosDto.getEmail());
             funcionariosEntity.setTelephone(funcionariosDto.getTelephone());
+            funcionariosEntity.setStatus(funcionariosDto.getStatus());
 
             if ("caixa".equals(funcionariosDto.getOffice())){
                 funcionariosEntity.setHoursMount(220);
@@ -61,6 +65,10 @@ public class FuncionariosServices {
                     float newSalary = funcionariosDto.getSalary() + (overtimeHrs * 100);
                     funcionariosEntity.setSalary(newSalary);
                 }
+            }
+
+            if (funcionariosDto.getStatus() == null){
+                throw new ValidacaoExcpetion("O STATUS NÃO PODE SER NULL");
             }
 
             if (funcionariosDto.getCpf() != null && funcionariosRepository.existsByCpf(funcionariosDto.getCpf())){
