@@ -11,6 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -59,6 +60,7 @@ public class FuncionariosServices {
             funcionariosEntity.setEmail(funcionariosDto.getEmail());
             funcionariosEntity.setTelephone(funcionariosDto.getTelephone());
             funcionariosEntity.setStatus(funcionariosDto.getStatus());
+            funcionariosEntity.setBirthdate(funcionariosDto.getBirthdate());
 
             if ("caixa".equals(funcionariosDto.getOffice())){
                 funcionariosEntity.setHoursMount(220);
@@ -95,6 +97,7 @@ public class FuncionariosServices {
             throw new ValidacaoExcpetion(e.getMessage());
         }
     }
+
 
     /**
      * Exclui todos os funcionários que tem o campo de 'cpf' null
