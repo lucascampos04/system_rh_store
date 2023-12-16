@@ -7,10 +7,12 @@ import com.rh.rhze.model.repository.FuncionariosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -45,7 +47,11 @@ public class FuncionariosServices {
      * */
     public FuncionariosDto insertFuncionario(FuncionariosDto funcionariosDto){
         try {
+
+            String senhaAleatoria = UUID.randomUUID().toString();
+
             FuncionariosEntity funcionariosEntity = new FuncionariosEntity();
+            funcionariosEntity.setPassword(new BCryptPasswordEncoder().encode(senhaAleatoria));
             funcionariosEntity.setName(funcionariosDto.getName());
             funcionariosEntity.setOffice(funcionariosDto.getOffice());
             funcionariosEntity.setSalary(funcionariosDto.getSalary());
