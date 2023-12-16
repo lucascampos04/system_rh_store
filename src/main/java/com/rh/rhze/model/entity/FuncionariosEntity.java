@@ -41,6 +41,9 @@ public class FuncionariosEntity {
     @Column(name = "cpf")
     private String cpf;
 
+    @Column(name = "senha")
+    private String password;
+
     @Column(name = "telefone")
     private String telephone;
 

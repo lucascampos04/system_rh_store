@@ -23,8 +23,20 @@ public class FuncionariosDto implements Serializable {
     private String telephone;
     private String email;
     private FuncionariosEntity.Status status;
+    private String password;
 
-    public FuncionariosDto(Long employeeidentifier, String name, float salary, String office, LocalDateTime datehiring, int hoursMount, String cpf, String telephone, String email, FuncionariosEntity.Status status) {
+
+    public FuncionariosDto(Long employeeidentifier,
+                           String name,
+                           float salary,
+                           String office,
+                           LocalDateTime datehiring,
+                           int hoursMount,
+                           String cpf,
+                           String telephone,
+                           String email,
+                           FuncionariosEntity.Status status,
+                           String password) {
         this.employeeidentifier = employeeidentifier;
         this.name = name;
         this.salary = salary;
@@ -35,6 +47,7 @@ public class FuncionariosDto implements Serializable {
         this.telephone = telephone;
         this.email = email;
         this.status = status;
+        this.password = password;
     }
 
     public static FuncionariosDto fromEntity(FuncionariosEntity entity){
@@ -48,7 +61,8 @@ public class FuncionariosDto implements Serializable {
                 entity.getCpf(),
                 entity.getTelephone(),
                 entity.getEmail(),
-                entity.getStatus()
+                entity.getStatus(),
+                entity.getPassword()
         );
     }
 
@@ -65,6 +79,7 @@ public class FuncionariosDto implements Serializable {
                 "telephone='" + telephone + '\'' + '\n' +
                 "email='" + email + '\'' + '\n' +
                 "status='" + status + '\'' + '\n' +
+                "password='" + password + '\'' + '\n' +
                 '}';
     }
 }
