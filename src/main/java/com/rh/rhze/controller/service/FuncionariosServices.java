@@ -48,11 +48,8 @@ public class FuncionariosServices {
      * */
     public FuncionariosDto insertFuncionario(FuncionariosDto funcionariosDto){
         try {
-
-            String senhaAleatoria = UUID.randomUUID().toString();
-
             FuncionariosEntity funcionariosEntity = new FuncionariosEntity();
-            funcionariosEntity.setPassword(new BCryptPasswordEncoder().encode(senhaAleatoria));
+            funcionariosEntity.setPassword(new BCryptPasswordEncoder().encode(funcionariosEntity.getPassword()));
             funcionariosEntity.setName(funcionariosDto.getName());
             funcionariosEntity.setOffice(funcionariosDto.getOffice());
             funcionariosEntity.setSalary(funcionariosDto.getSalary());
