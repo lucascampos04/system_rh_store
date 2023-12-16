@@ -1,10 +1,10 @@
 package com.rh.rhze.model.dto;
 
 import com.rh.rhze.model.entity.FuncionariosEntity;
-import jakarta.persistence.Column;
 import lombok.*;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
@@ -24,6 +24,7 @@ public class FuncionariosDto implements Serializable {
     private String email;
     private FuncionariosEntity.Status status;
     private String password;
+    private LocalDate birthdate;
 
 
     public FuncionariosDto(Long employeeidentifier,
@@ -36,7 +37,8 @@ public class FuncionariosDto implements Serializable {
                            String telephone,
                            String email,
                            FuncionariosEntity.Status status,
-                           String password) {
+                           String password,
+                           LocalDate birthdate) {
         this.employeeidentifier = employeeidentifier;
         this.name = name;
         this.salary = salary;
@@ -48,6 +50,7 @@ public class FuncionariosDto implements Serializable {
         this.email = email;
         this.status = status;
         this.password = password;
+        this.birthdate = birthdate;
     }
 
     public static FuncionariosDto fromEntity(FuncionariosEntity entity){
@@ -62,7 +65,8 @@ public class FuncionariosDto implements Serializable {
                 entity.getTelephone(),
                 entity.getEmail(),
                 entity.getStatus(),
-                entity.getPassword()
+                entity.getPassword(),
+                entity.getBirthdate()
         );
     }
 
@@ -80,6 +84,7 @@ public class FuncionariosDto implements Serializable {
                 "email='" + email + '\'' + '\n' +
                 "status='" + status + '\'' + '\n' +
                 "password='" + password + '\'' + '\n' +
+                "birthdate='" + birthdate + '\'' + '\n' +
                 '}';
     }
 }

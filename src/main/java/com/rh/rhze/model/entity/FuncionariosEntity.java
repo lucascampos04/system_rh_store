@@ -1,12 +1,16 @@
 package com.rh.rhze.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.Instant;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 @Getter
@@ -26,7 +30,8 @@ public class FuncionariosEntity {
     @Column(name = "cargo")
     private  String office;
 
-    @Column(name = "data_contratacao")
+    @Column(name = "data_contratacao", columnDefinition = "TIMESTAMP")
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDateTime datehiring;
 
     @Column(name = "horas_mes")
@@ -46,6 +51,10 @@ public class FuncionariosEntity {
 
     @Column(name = "telefone")
     private String telephone;
+
+    @Column(name = "data_nascimento", columnDefinition = "DATE")
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    private LocalDate birthdate;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
